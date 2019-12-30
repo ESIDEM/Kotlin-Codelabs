@@ -1,12 +1,11 @@
-MarsRealEstate - Starter Code
+Kotlin Codelabs Serie
 ==============================
 
-Starter code for Android Kotlin Fundamentals Codelab 8.1 Getting data from the internet
 
 Introduction
 ------------
 
-MarsRealEstate is a demo app that shows available properties for sale and for rent on Mars.
+Kotlin Codelab is a demo app that shows available properties for sale and for rent on Mars.
 The property data is stored on a Web server as a REST web service.  This app demonstrated
 the use of [Retrofit](https://square.github.io/retrofit/) to make REST requests to the 
 web service, [Moshi](https://github.com/square/moshi) to handle the deserialization of the 
@@ -27,12 +26,6 @@ You need to know:
 - How to navigate between fragments, and use safeArgs to pass data between fragments.
 - How to use architecture components including ViewModel, ViewModelProvider.Factory, LiveData, and LiveData transformations.
 - How to use coroutines for long-running tasks.
-
-
-Getting Started
----------------
-
-1. Download and run the app.
 
 License
 -------
