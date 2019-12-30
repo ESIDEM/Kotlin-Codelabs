@@ -1,4 +1,4 @@
-Kotlin Codelabs Serie
+Kotlin Codelabs Series
 ==============================
 
 
