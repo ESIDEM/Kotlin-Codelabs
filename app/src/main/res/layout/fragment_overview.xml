@@ -24,7 +24,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ng.com.techdepo.kotlincodelabs.overview.OverviewViewModel" />
+            type="ng.com.techdepo.kotlincodelabs.viewmodels.OverviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

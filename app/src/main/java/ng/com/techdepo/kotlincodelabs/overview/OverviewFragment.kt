@@ -24,8 +24,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import ng.com.techdepo.kotlincodelabs.R
+import ng.com.techdepo.kotlincodelabs.adapters.PhotoGridAdapter
 import ng.com.techdepo.kotlincodelabs.databinding.FragmentOverviewBinding
 import ng.com.techdepo.kotlincodelabs.network.MarsApiFilter
+import ng.com.techdepo.kotlincodelabs.viewmodels.OverviewViewModel
 
 
 /**

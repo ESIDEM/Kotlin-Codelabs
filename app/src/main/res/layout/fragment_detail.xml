@@ -23,7 +23,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ng.com.techdepo.kotlincodelabs.detail.DetailViewModel" />
+            type="ng.com.techdepo.kotlincodelabs.viewmodels.DetailViewModel" />
     </data>
 
     <ScrollView

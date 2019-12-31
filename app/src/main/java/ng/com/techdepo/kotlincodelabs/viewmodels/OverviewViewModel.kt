@@ -15,7 +15,7 @@
  *
  */
 
-package ng.com.techdepo.kotlincodelabs.overview
+package ng.com.techdepo.kotlincodelabs.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

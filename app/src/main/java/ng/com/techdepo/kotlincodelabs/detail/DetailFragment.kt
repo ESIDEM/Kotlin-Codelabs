@@ -23,6 +23,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import ng.com.techdepo.kotlincodelabs.databinding.FragmentDetailBinding
+import ng.com.techdepo.kotlincodelabs.viewmodels.DetailViewModel
+import ng.com.techdepo.kotlincodelabs.viewmodels.DetailViewModelFactory
 
 
 /**

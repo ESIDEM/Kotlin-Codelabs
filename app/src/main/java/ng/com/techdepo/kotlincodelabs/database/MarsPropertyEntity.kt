@@ -15,20 +15,20 @@
  *
  */
 
-package ng.com.techdepo.kotlincodelabs.network
+package ng.com.techdepo.kotlincodelabs.database
 
-import android.os.Parcelable
-import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
-data class MarsProperty(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity
+data class MarsPropertyEntity constructor(
+
+        @PrimaryKey
         val id: String,
-        @Json(name = "img_src") val imgSrcUrl: String,
+        val imgSrcUrl: String,
         val type: String,
         val price: Double
-): Parcelable{
-    val isRental
-        get() = type == "rent"
-}
+)
 

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package ng.com.techdepo.kotlincodelabs.detail
+package ng.com.techdepo.kotlincodelabs.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
