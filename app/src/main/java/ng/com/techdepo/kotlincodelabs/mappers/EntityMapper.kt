@@ -3,7 +3,7 @@ package ng.com.techdepo.kotlincodelabs.mappers
 import ng.com.techdepo.kotlincodelabs.database.MarsPropertyEntity
 import ng.com.techdepo.kotlincodelabs.network.MarsProperty
 
-class EntityMapper() {
+class EntityMapper()
 
     /**
      * Map DatabaseVideos to domain entities
@@ -29,4 +29,3 @@ class EntityMapper() {
             )
         }
     }
-}
