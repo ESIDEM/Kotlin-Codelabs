@@ -15,7 +15,7 @@
  *
  */
 
-package ng.com.techdepo.kotlincodelabs.overview
+package ng.com.techdepo.kotlincodelabs.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -28,12 +28,12 @@ import ng.com.techdepo.kotlincodelabs.network.MarsProperty
 
 class PhotoGridAdapter(private val onClickListener: OnClickListener) : ListAdapter<MarsProperty,
         PhotoGridAdapter.MarsPropertyViewHolder>(DiffCallback) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoGridAdapter.MarsPropertyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarsPropertyViewHolder {
         return MarsPropertyViewHolder(GridViewItemBinding.inflate(
                 LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: PhotoGridAdapter.MarsPropertyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MarsPropertyViewHolder, position: Int) {
         val marsProperty = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(marsProperty)

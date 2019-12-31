@@ -15,7 +15,7 @@
  *
  */
 
-package ng.com.techdepo.kotlincodelabs
+package ng.com.techdepo.kotlincodelabs.adapters
 
 import android.view.View
 import android.widget.ImageView
@@ -24,9 +24,9 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import ng.com.techdepo.kotlincodelabs.R
 import ng.com.techdepo.kotlincodelabs.network.MarsProperty
-import ng.com.techdepo.kotlincodelabs.overview.OverviewViewModel
-import ng.com.techdepo.kotlincodelabs.overview.PhotoGridAdapter
+import ng.com.techdepo.kotlincodelabs.viewmodels.OverviewViewModel
 
 
 @BindingAdapter("imageUrl")
