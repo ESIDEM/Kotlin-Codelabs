@@ -62,45 +62,21 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
      */
     init {
-        refreshDataFromRepository()
+        refreshDataFromRepository(MarsApiFilter.SHOW_ALL)
     }
 
-    /**
-     * Sets the value of the status LiveData to the Mars API status.
-     */
-//    private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
-//
-//        coroutineScope.launch {
-//            // Get the Deferred object for our Retrofit request
-//            var getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
-//            try {
-//                _status.value = MarsApiStatus.LOADING
-//
-//                // Await the completion of our Retrofit request
-//                var listResult = getPropertiesDeferred.await()
-//
-//                _status.value = MarsApiStatus.DONE
-//
-//                if (listResult.size > 0) {
-//                    _property.value = listResult
-//                }
-//            } catch (e: Exception) {
-//                _status.value = MarsApiStatus.ERROR
-//                _property.value = ArrayList()
-//            }
-//        }
-//    }
 
-    private fun refreshDataFromRepository() {
+    private fun refreshDataFromRepository(filter: MarsApiFilter) {
         coroutineScope.launch {
             try {
-                marsRepository.refreshMars()
+                marsRepository.refreshMars(filter.value)
+                _status.value = MarsApiStatus.DONE
 
 
             } catch (networkError: IOException) {
                 // Show a Toast error message and hide the progress bar.
                 if(marsList.value!!.isEmpty())
-                   Toast.makeText(getApplication(),"Couldn't fetch data",Toast.LENGTH_SHORT).show()
+                    _status.value = MarsApiStatus.ERROR
             }
         }
     }
@@ -112,9 +88,9 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
 
     enum class MarsApiStatus { LOADING, ERROR, DONE }
 
-//    fun updateFilter(filter: MarsApiFilter) {
-//        getMarsRealEstateProperties(filter)
-//    }
+    fun updateFilter(filter: MarsApiFilter) {
+        refreshDataFromRepository(filter)
+    }
 
     fun displayPropertyDetails(marsProperty: MarsProperty) {
         _navigateToSelectedProperty.value = marsProperty

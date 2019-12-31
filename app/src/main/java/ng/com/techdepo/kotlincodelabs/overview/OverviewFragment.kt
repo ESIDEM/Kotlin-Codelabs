@@ -50,8 +50,6 @@ class OverviewFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentOverviewBinding.inflate(inflater)
 
-        //val binding = GridViewItemBinding.inflate(inflater)
-
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(this)
 
@@ -82,15 +80,15 @@ class OverviewFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        viewModel.updateFilter(
-//                when (item?.itemId) {
-//                    R.id.show_rent_menu -> MarsApiFilter.SHOW_RENT
-//                    R.id.show_buy_menu -> MarsApiFilter.SHOW_BUY
-//                    else -> MarsApiFilter.SHOW_ALL
-//                }
-//        )
-//
-//        return true
-//    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        viewModel.updateFilter(
+                when (item?.itemId) {
+                    R.id.show_rent_menu -> MarsApiFilter.SHOW_RENT
+                    R.id.show_buy_menu -> MarsApiFilter.SHOW_BUY
+                    else -> MarsApiFilter.SHOW_ALL
+                }
+        )
+
+        return true
+    }
 }

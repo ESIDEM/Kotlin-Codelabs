@@ -16,4 +16,7 @@ interface MarsDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll( mars: List<MarsPropertyEntity>)
+
+    @Query("delete from marspropertyentity")
+    fun deleteAll()
 }
