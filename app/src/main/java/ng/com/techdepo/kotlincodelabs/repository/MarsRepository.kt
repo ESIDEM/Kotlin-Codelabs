@@ -9,8 +9,9 @@ import ng.com.techdepo.kotlincodelabs.mappers.toDatabaseModel
 import ng.com.techdepo.kotlincodelabs.mappers.toDomainModel
 import ng.com.techdepo.kotlincodelabs.network.MarsApi
 import ng.com.techdepo.kotlincodelabs.network.MarsProperty
+import javax.inject.Inject
 
-class MarsRepository( private val marsDatabase: MarsDatabase) {
+class MarsRepository @Inject constructor( val marsDatabase: MarsDatabase) {
 
     val marsProperty: LiveData<List<MarsProperty>> = Transformations.map( marsDatabase.marsDAO.getMars()){
         it.toDomainModel()

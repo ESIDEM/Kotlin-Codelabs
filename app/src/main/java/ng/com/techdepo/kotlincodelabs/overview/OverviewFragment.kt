@@ -17,17 +17,21 @@
 
 package ng.com.techdepo.kotlincodelabs.overview
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import dagger.android.support.AndroidSupportInjection
 import ng.com.techdepo.kotlincodelabs.R
 import ng.com.techdepo.kotlincodelabs.adapters.PhotoGridAdapter
 import ng.com.techdepo.kotlincodelabs.databinding.FragmentOverviewBinding
 import ng.com.techdepo.kotlincodelabs.network.MarsApiFilter
 import ng.com.techdepo.kotlincodelabs.viewmodels.OverviewViewModel
+import javax.inject.Inject
 
 
 /**
@@ -35,12 +39,17 @@ import ng.com.techdepo.kotlincodelabs.viewmodels.OverviewViewModel
  */
 class OverviewFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelProvider: ViewModelProvider.Factory
+
+    lateinit var viewModel:OverviewViewModel
+
     /**
      * Lazily initialize our [OverviewViewModel].
      */
-    private val viewModel: OverviewViewModel by lazy {
-        ViewModelProviders.of(this).get(OverviewViewModel::class.java)
-    }
+//    private val viewModel: OverviewViewModel by lazy {
+//        ViewModelProviders.of(this).get(OverviewViewModel::class.java)
+//    }
 
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
@@ -52,6 +61,8 @@ class OverviewFragment : Fragment() {
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(this)
+
+        viewModel = ViewModelProviders.of(this,viewModelProvider)[OverviewViewModel::class.java]
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
@@ -72,6 +83,10 @@ class OverviewFragment : Fragment() {
         return binding.root
     }
 
+    override fun onAttach(context: Context?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
     /**
      * Inflates the overflow menu that contains filtering options.
      */

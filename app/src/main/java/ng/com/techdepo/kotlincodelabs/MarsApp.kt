@@ -1,15 +1,19 @@
 package ng.com.techdepo.kotlincodelabs
 
-import android.app.Application
+
 import android.os.Build
 import androidx.work.*
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ng.com.techdepo.kotlincodelabs.di.DaggerAppComponent
 import ng.com.techdepo.kotlincodelabs.work.RefreshDataWorker
 import java.util.concurrent.TimeUnit
 
-class MarsApp : Application() {
+class MarsApp : DaggerApplication() {
+
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
 
@@ -48,4 +52,9 @@ class MarsApp : Application() {
 
         delayedInit()
     }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.factory().create(this)
+    }
+
 }
