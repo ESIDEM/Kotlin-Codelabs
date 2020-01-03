@@ -27,8 +27,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import ng.com.techdepo.kotlincodelabs.MarsApiFilter
 import ng.com.techdepo.kotlincodelabs.MarsApp
-import ng.com.techdepo.kotlincodelabs.network.MarsApiFilter
 import ng.com.techdepo.kotlincodelabs.network.MarsProperty
 import ng.com.techdepo.kotlincodelabs.repository.MarsRepository
 import java.io.IOException

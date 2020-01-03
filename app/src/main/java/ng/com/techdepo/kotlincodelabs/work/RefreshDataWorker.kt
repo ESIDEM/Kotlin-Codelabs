@@ -3,9 +3,6 @@ package ng.com.techdepo.kotlincodelabs.work
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import ng.com.techdepo.kotlincodelabs.network.MarsApiFilter
-import ng.com.techdepo.kotlincodelabs.repository.MarsRepository
-import retrofit2.HttpException
 
 class RefreshDataWorker(context: Context,params: WorkerParameters):CoroutineWorker(context,params) {
 

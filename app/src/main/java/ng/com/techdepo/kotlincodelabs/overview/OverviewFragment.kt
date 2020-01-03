@@ -26,10 +26,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import dagger.android.support.AndroidSupportInjection
+import ng.com.techdepo.kotlincodelabs.MarsApiFilter
 import ng.com.techdepo.kotlincodelabs.R
 import ng.com.techdepo.kotlincodelabs.adapters.PhotoGridAdapter
 import ng.com.techdepo.kotlincodelabs.databinding.FragmentOverviewBinding
-import ng.com.techdepo.kotlincodelabs.network.MarsApiFilter
 import ng.com.techdepo.kotlincodelabs.viewmodels.OverviewViewModel
 import javax.inject.Inject
 

@@ -10,18 +10,13 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AndroidSupportInjectionModule::class,MarsModule::class,StorageModule::class,
-OverviewFragmentModule::class])
+OverviewFragmentModule::class,NetworkModule::class])
 interface AppComponent: AndroidInjector<MarsApp> {
 
-//    override fun inject(app: MarsApp)
 
     @Component.Factory
     abstract class Builder : AndroidInjector.Factory<MarsApp>
-//    interface Builder {
-//        fun build(): AppComponent
-//        @BindsInstance
-//        fun app(app: Context): Builder
-//    }
+
 }
 
 

@@ -5,8 +5,8 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import ng.com.techdepo.kotlincodelabs.MarsApp
 import ng.com.techdepo.kotlincodelabs.database.MarsDatabase
+import ng.com.techdepo.kotlincodelabs.network.MarsApiService
 import ng.com.techdepo.kotlincodelabs.repository.MarsRepository
 import javax.inject.Singleton
 
@@ -39,9 +39,9 @@ open class StorageModule {
 
     @Provides
     @Singleton
-    fun getRepository(database: MarsDatabase):MarsRepository{
+    fun getRepository(database: MarsDatabase,marsApiService: MarsApiService):MarsRepository{
 
-        return MarsRepository(database)
+        return MarsRepository(database,marsApiService)
     }
 
 }
