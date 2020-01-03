@@ -7,10 +7,11 @@ import kotlinx.coroutines.withContext
 import ng.com.techdepo.kotlincodelabs.database.MarsDatabase
 import ng.com.techdepo.kotlincodelabs.mappers.toDatabaseModel
 import ng.com.techdepo.kotlincodelabs.mappers.toDomainModel
-import ng.com.techdepo.kotlincodelabs.network.MarsApi
+import ng.com.techdepo.kotlincodelabs.network.MarsApiService
 import ng.com.techdepo.kotlincodelabs.network.MarsProperty
+import javax.inject.Inject
 
-class MarsRepository( private val marsDatabase: MarsDatabase) {
+class MarsRepository @Inject constructor( val marsDatabase: MarsDatabase,val marsApiService: MarsApiService) {
 
     val marsProperty: LiveData<List<MarsProperty>> = Transformations.map( marsDatabase.marsDAO.getMars()){
         it.toDomainModel()
@@ -18,7 +19,7 @@ class MarsRepository( private val marsDatabase: MarsDatabase) {
 
     suspend fun refreshMars(filter: String) {
         withContext(Dispatchers.IO) {
-            var marsList = MarsApi.retrofitService.getProperties(filter).await()
+            var marsList = marsApiService.getProperties(filter).await()
             if (marsList.isEmpty()){
                 return@withContext
             }else {
