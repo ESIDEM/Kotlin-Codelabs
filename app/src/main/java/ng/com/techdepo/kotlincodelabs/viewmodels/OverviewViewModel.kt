@@ -16,29 +16,27 @@
  */
 
 package ng.com.techdepo.kotlincodelabs.viewmodels
-import android.app.Application
-import android.content.Context
-import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 import ng.com.techdepo.kotlincodelabs.MarsApiFilter
-import ng.com.techdepo.kotlincodelabs.MarsApp
+import ng.com.techdepo.kotlincodelabs.database.MarsDatabase
+import ng.com.techdepo.kotlincodelabs.mappers.toDatabaseModel
 import ng.com.techdepo.kotlincodelabs.network.MarsProperty
 import ng.com.techdepo.kotlincodelabs.repository.MarsRepository
-import java.io.IOException
 import javax.inject.Inject
 
 
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
  */
-class OverviewViewModel @Inject constructor(val marsRepository: MarsRepository)
+class OverviewViewModel @Inject constructor(val marsRepository: MarsRepository,
+                                            val compositeDisposable: CompositeDisposable,
+                                            val marsDatabase: MarsDatabase)
     : ViewModel() {
 
 
@@ -50,11 +48,6 @@ class OverviewViewModel @Inject constructor(val marsRepository: MarsRepository)
     // The external immutable LiveData for the response String
     val response: LiveData<MarsApiStatus>
         get() = _status
-
-    private var viewModelJob = Job()
-
-    private val coroutineScope = CoroutineScope(
-            viewModelJob + Dispatchers.Main )
 
     private val _navigateToSelectedProperty = MutableLiveData<MarsProperty>()
     val navigateToSelectedProperty: LiveData<MarsProperty>
@@ -69,23 +62,35 @@ class OverviewViewModel @Inject constructor(val marsRepository: MarsRepository)
 
 
     private fun refreshDataFromRepository(filter: MarsApiFilter) {
-        coroutineScope.launch {
-            try {
-                marsRepository.refreshMars(filter.value)
-                _status.value = MarsApiStatus.DONE
+
+        compositeDisposable.add(
+                marsRepository.refreshMars(filter.value).subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.io()).subscribeWith(
+                                object : DisposableSingleObserver<List<MarsProperty>>(){
+                                    override fun onSuccess(value: List<MarsProperty>?) {
+                                        if (!value!!.isEmpty()) {
+                                            marsDatabase.marsDAO.deleteAll()
+                                            marsDatabase.marsDAO.insertAll(value.toDatabaseModel())
+                                        }else{
+                                           return
+                                        }
+                                        _status.postValue(MarsApiStatus.DONE)
+                                    }
+
+                                    override fun onError(e: Throwable?) {
+                                      _status.postValue(MarsApiStatus.ERROR)
+                                    }
 
 
-            } catch (networkError: IOException) {
-                // Show a Toast error message and hide the progress bar.
-                if(marsList.value!!.isEmpty())
-                    _status.value = MarsApiStatus.ERROR
-            }
-        }
+                                }
+
+                        )
+        )
     }
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+       compositeDisposable.clear()
     }
 
     enum class MarsApiStatus { LOADING, ERROR, DONE }

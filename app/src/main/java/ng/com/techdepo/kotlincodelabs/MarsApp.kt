@@ -49,7 +49,6 @@ class MarsApp : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-
         delayedInit()
     }
 

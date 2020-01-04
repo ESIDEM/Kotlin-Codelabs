@@ -13,7 +13,6 @@ import javax.inject.Singleton
 OverviewFragmentModule::class,NetworkModule::class])
 interface AppComponent: AndroidInjector<MarsApp> {
 
-
     @Component.Factory
     abstract class Builder : AndroidInjector.Factory<MarsApp>
 
