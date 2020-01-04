@@ -18,7 +18,8 @@
 package ng.com.techdepo.kotlincodelabs.network
 
 
-import kotlinx.coroutines.Deferred
+
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -29,7 +30,7 @@ import retrofit2.http.Query
 interface MarsApiService {
     @GET("realestate")
     fun getProperties(@Query("filter") type: String):
-            Deferred<List<MarsProperty>>
+            Single<List<MarsProperty>>
 }
 
 

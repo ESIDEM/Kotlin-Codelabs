@@ -20,6 +20,8 @@ buildscript {
         version_room = "2.2.3"
         work_version = "1.0.1"
         dagger_version = "2.25.2"
+        dagger_assist_version = "0.3.3"
+        rxJava_version ="2.0.1"
     }
 
     repositories {
