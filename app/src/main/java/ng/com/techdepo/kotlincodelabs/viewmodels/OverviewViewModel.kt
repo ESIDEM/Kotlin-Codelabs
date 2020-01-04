@@ -74,11 +74,11 @@ class OverviewViewModel @Inject constructor(val marsRepository: MarsRepository,
                                         }else{
                                            return
                                         }
-                                      //  _status.value = MarsApiStatus.DONE
+                                        _status.postValue(MarsApiStatus.DONE)
                                     }
 
                                     override fun onError(e: Throwable?) {
-                                      //  _status.value = MarsApiStatus.ERROR
+                                      _status.postValue(MarsApiStatus.ERROR)
                                     }
 
 
